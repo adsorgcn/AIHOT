@@ -1,578 +1,278 @@
 {
-  "exportedAt": "2026-09-26",
+  "exportedAt": "2026-10-01",
   "groups": [
     {
-      "key": "company",
-      "name": "公司与模型",
-      "blurb": "按厂商与模型系追踪：谁发了什么、又赢了哪一局"
+      "key": "upstream",
+      "name": "上游厂商",
+      "blurb": "按上游模型厂商看：政策、价格和模型变化怎样落到中转站"
     },
     {
-      "key": "field",
-      "name": "技术方向",
-      "blurb": "按技术领域深挖：Agent、多模态、具身智能……"
+      "key": "feature",
+      "name": "能力",
+      "blurb": "按模型和能力看：gpt4、claude、gemini、推理、视觉、代码、语音"
     },
     {
-      "key": "genre",
-      "name": "内容形态",
-      "blurb": "按内容类型浏览：论文、教程、观点、政策……"
+      "key": "issue",
+      "name": "事件",
+      "blurb": "按发生了什么看：涨价、降价、故障、新模型、关停、跑路、泄露"
     }
   ],
   "topics": [
     {
       "slug": "openai",
-      "name": "OpenAI / ChatGPT",
-      "group": "company",
+      "name": "OpenAI",
+      "group": "upstream",
       "entityId": "openai",
-      "tags": [
-        "OpenAI",
-        "entity:openai"
-      ],
-      "definition": "OpenAI 的全部动态：GPT 系列模型、ChatGPT 与 Sora 产品、公司战略与人事的持续追踪。",
-      "related": [
-        "anthropic",
-        "google",
-        "model-releases"
-      ]
+      "tags": ["openai", "entity:openai"],
+      "definition": "OpenAI 的政策、价格、模型和状态变化，以及这些变化在中转站上的对应事实。",
+      "related": ["anthropic", "google", "policy"]
     },
     {
       "slug": "anthropic",
-      "name": "Anthropic / Claude",
-      "group": "company",
+      "name": "Anthropic",
+      "group": "upstream",
       "entityId": "anthropic",
-      "tags": [
-        "Anthropic",
-        "entity:anthropic"
-      ],
-      "definition": "Anthropic 的全部动态：Claude 系列模型、Claude Code、安全研究路线与公司进展的持续追踪。",
-      "related": [
-        "openai",
-        "google",
-        "safety"
-      ]
+      "tags": ["anthropic", "entity:anthropic"],
+      "definition": "Anthropic 与 Claude 的政策、价格、模型和状态变化，以及中转站是否仍提供这些模型。",
+      "related": ["openai", "google", "claude"]
     },
     {
       "slug": "google",
-      "name": "Google / Gemini",
-      "group": "company",
+      "name": "Google",
+      "group": "upstream",
       "entityId": "google",
-      "tags": [
-        "Google",
-        "DeepMind",
-        "entity:google"
-      ],
-      "definition": "Google 与 DeepMind 的 AI 动态：Gemini 系列、Veo 视频模型、研究成果与产品生态的持续追踪。",
-      "related": [
-        "openai",
-        "anthropic",
-        "multimodal"
-      ]
+      "tags": ["google", "entity:google"],
+      "definition": "Google 与 Gemini 的政策、价格、模型和状态变化，以及中转站上的对应事实。",
+      "related": ["openai", "anthropic", "gemini"]
     },
     {
       "slug": "deepseek",
       "name": "DeepSeek",
-      "group": "company",
+      "group": "upstream",
       "entityId": "deepseek",
-      "tags": [
-        "DeepSeek",
-        "entity:deepseek"
-      ],
-      "definition": "DeepSeek（深度求索）的模型发布、开源权重与技术报告——开源大模型价格与性能双卷的风向标。",
-      "related": [
-        "qwen",
-        "open-source",
-        "model-releases"
-      ]
+      "tags": ["deepseek", "entity:deepseek"],
+      "definition": "DeepSeek 模型在中转站的上下架、价格和可用性。",
+      "related": ["qwen", "glm", "new-model"]
     },
     {
       "slug": "qwen",
       "name": "千问 Qwen",
-      "group": "company",
+      "group": "upstream",
       "entityId": "qwen",
-      "tags": [
-        "entity:qwen"
-      ],
-      "definition": "阿里千问 Qwen 系列的开源发布与迭代：从旗舰模型到端侧小模型的全谱系动态。",
-      "related": [
-        "deepseek",
-        "kimi",
-        "open-source"
-      ]
+      "tags": ["qwen", "entity:qwen"],
+      "definition": "千问 Qwen 在中转站的上下架、价格和可用性。",
+      "related": ["deepseek", "glm", "new-model"]
     },
     {
-      "slug": "kimi",
-      "name": "Kimi / 月之暗面",
-      "group": "company",
-      "entityId": "kimi",
-      "tags": [
-        "entity:kimi"
-      ],
-      "definition": "月之暗面 Kimi 系列模型与产品动态：K 系列开源模型、长上下文技术与产品演进的追踪。",
-      "related": [
-        "qwen",
-        "deepseek",
-        "minimax"
-      ]
-    },
-    {
-      "slug": "minimax",
-      "name": "MiniMax",
-      "group": "company",
-      "entityId": "minimax",
-      "tags": [
-        "entity:minimax"
-      ],
-      "definition": "MiniMax 的模型与产品动态：M 系列大模型、语音与多模态能力、开源与商业化进展。",
-      "related": [
-        "kimi",
-        "qwen",
-        "voice"
-      ]
-    },
-    {
-      "slug": "zhipu",
+      "slug": "glm",
       "name": "智谱 GLM",
-      "group": "company",
-      "entityId": "zhipu",
-      "tags": [
-        "entity:zhipu"
-      ],
-      "definition": "智谱的 GLM 系列模型动态：旗舰开源发布、代码与推理能力迭代、商业化与生态进展的追踪。",
-      "related": [
-        "qwen",
-        "kimi",
-        "open-source"
-      ]
+      "group": "upstream",
+      "entityId": "glm",
+      "tags": ["glm", "entity:glm"],
+      "definition": "智谱 GLM 在中转站的上下架、价格和可用性。",
+      "related": ["qwen", "deepseek", "new-model"]
     },
     {
-      "slug": "xai",
-      "name": "xAI / Grok",
-      "group": "company",
-      "entityId": "xai",
-      "tags": [
-        "xAI",
-        "entity:xai"
-      ],
-      "definition": "马斯克 xAI 与 Grok 系列的全部动态：模型迭代、算力扩张与 X 平台整合的持续追踪。",
-      "related": [
-        "openai",
-        "meta",
-        "industry"
-      ]
+      "slug": "mistral",
+      "name": "Mistral",
+      "group": "upstream",
+      "entityId": "mistral",
+      "tags": ["mistral", "entity:mistral"],
+      "definition": "Mistral 在中转站的上下架、价格和可用性。",
+      "related": ["meta", "new-model"]
     },
     {
       "slug": "meta",
-      "name": "Meta / Llama",
-      "group": "company",
+      "name": "Meta",
+      "group": "upstream",
       "entityId": "meta",
-      "tags": [
-        "Meta",
-        "entity:meta"
-      ],
-      "definition": "Meta 的 AI 动态：Llama 开源模型系列、超级智能实验室与元宇宙之外的 AI 豪赌。",
-      "related": [
-        "xai",
-        "open-source",
-        "industry"
-      ]
+      "tags": ["meta", "entity:meta"],
+      "definition": "Meta 与 Llama 在中转站的上下架、价格和可用性。",
+      "related": ["mistral", "new-model"]
     },
     {
-      "slug": "microsoft",
-      "name": "Microsoft / Copilot",
-      "group": "company",
-      "entityId": "microsoft",
-      "tags": [
-        "Microsoft",
-        "entity:microsoft"
-      ],
-      "definition": "微软的 AI 布局：Copilot 全家桶、Azure AI 基础设施与 OpenAI 合作关系的持续追踪。",
-      "related": [
-        "openai",
-        "coding",
-        "product-updates"
-      ]
+      "slug": "gpt4",
+      "name": "GPT",
+      "group": "feature",
+      "tags": ["gpt4"],
+      "definition": "GPT 系列经中转站提供时的价格、可用性和故障。",
+      "related": ["openai", "pricing", "o1"]
     },
     {
-      "slug": "nvidia",
-      "name": "NVIDIA 英伟达",
-      "group": "company",
-      "entityId": "nvidia",
-      "tags": [
-        "entity:nvidia"
-      ],
-      "definition": "英伟达的 AI 芯片与生态动态：GPU 新品、CUDA 生态、机器人平台与 AI 算力市场的风向。",
-      "related": [
-        "engineering",
-        "industry",
-        "embodied"
-      ]
+      "slug": "claude",
+      "name": "Claude",
+      "group": "feature",
+      "tags": ["claude"],
+      "definition": "Claude 系列经中转站提供时的价格、可用性和故障。",
+      "related": ["anthropic", "pricing", "code"]
     },
     {
-      "slug": "hugging-face",
-      "name": "Hugging Face",
-      "group": "company",
-      "entityId": "hugging-face",
-      "tags": [
-        "Hugging Face",
-        "entity:hugging-face"
-      ],
-      "definition": "Hugging Face 开源社区动态：热门模型与数据集、排行榜变化与开源生态的晴雨表。",
-      "related": [
-        "open-source",
-        "model-releases",
-        "data-training"
-      ]
+      "slug": "gemini",
+      "name": "Gemini",
+      "group": "feature",
+      "tags": ["gemini"],
+      "definition": "Gemini 系列经中转站提供时的价格、可用性和故障。",
+      "related": ["google", "pricing", "vision"]
     },
     {
-      "slug": "cursor",
-      "name": "Cursor",
-      "group": "company",
-      "entityId": "cursor",
-      "tags": [
-        "entity:cursor"
-      ],
-      "definition": "Cursor 编辑器的产品迭代与生态动态——AI 编码工具竞争中最受关注的玩家之一。",
-      "related": [
-        "coding",
-        "agent",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "openrouter",
-      "name": "OpenRouter",
-      "group": "company",
-      "entityId": "openrouter",
-      "tags": [
-        "entity:openrouter"
-      ],
-      "definition": "OpenRouter 模型路由平台动态：新模型上架、用量排行与开发者选型的真实市场信号。",
-      "related": [
-        "engineering",
-        "model-releases",
-        "open-source"
-      ]
-    },
-    {
-      "slug": "agent",
-      "name": "Agent 智能体",
-      "group": "field",
-      "tags": [
-        "Agent"
-      ],
-      "definition": "让模型自主规划、调用工具、完成多步任务的技术方向——从 Claude Code、Manus 到各家 Agent 框架与评测基准的全部动态。",
-      "related": [
-        "mcp",
-        "coding",
-        "reasoning"
-      ]
-    },
-    {
-      "slug": "coding",
-      "name": "AI 编码",
-      "group": "field",
-      "tags": [
-        "编码"
-      ],
-      "definition": "AI 写代码的一切：编码助手、Vibe Coding、代码模型评测与开发工作流变革。",
-      "related": [
-        "agent",
-        "cursor",
-        "tutorials"
-      ]
+      "slug": "o1",
+      "name": "o 系列",
+      "group": "feature",
+      "tags": ["o1"],
+      "definition": "o 系列等思考型模型在中转站的上下架与价格。",
+      "related": ["reasoning", "openai", "gpt4"]
     },
     {
       "slug": "reasoning",
-      "name": "推理能力",
-      "group": "field",
-      "tags": [
-        "推理"
-      ],
-      "definition": "模型推理能力的进展：思维链、推理模型、数学与逻辑基准的突破与争议。",
-      "related": [
-        "papers",
-        "model-releases",
-        "agent"
-      ]
+      "name": "推理",
+      "group": "feature",
+      "tags": ["reasoning"],
+      "definition": "推理模型在中转站的可用性、价格和故障。",
+      "related": ["o1", "models"]
     },
     {
-      "slug": "multimodal",
-      "name": "多模态",
-      "group": "field",
-      "tags": [
-        "多模态"
-      ],
-      "definition": "文本之外的能力：视觉理解、图文混合、音视频输入输出的模型与产品进展。",
-      "related": [
-        "image-gen",
-        "video",
-        "voice"
-      ]
+      "slug": "vision",
+      "name": "视觉",
+      "group": "feature",
+      "tags": ["vision"],
+      "definition": "视觉与多模态能力在中转站的可用性与价格。",
+      "related": ["gemini", "models"]
     },
     {
-      "slug": "image-gen",
-      "name": "图像生成",
-      "group": "field",
-      "tags": [
-        "图像生成"
-      ],
-      "definition": "AI 画图的最前线：文生图模型迭代、图像编辑能力与创作工具生态的全部动态。",
-      "related": [
-        "video",
-        "multimodal",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "video",
-      "name": "AI 视频",
-      "group": "field",
-      "tags": [
-        "视频"
-      ],
-      "definition": "AI 视频生成与理解：文生视频模型、视频编辑工具与影视创作变革的追踪。",
-      "related": [
-        "image-gen",
-        "multimodal",
-        "voice"
-      ]
+      "slug": "code",
+      "name": "代码",
+      "group": "feature",
+      "tags": ["code"],
+      "definition": "代码模型与编码接口在中转站的可用性、价格和故障。",
+      "related": ["claude", "models"]
     },
     {
       "slug": "voice",
-      "name": "语音与音频",
-      "group": "field",
-      "tags": [
-        "语音"
-      ],
-      "definition": "AI 语音与音频的进展：语音合成、实时对话、音乐生成与音频理解的模型与产品。",
-      "related": [
-        "multimodal",
-        "video",
-        "product-updates"
-      ]
+      "name": "语音",
+      "group": "feature",
+      "tags": ["voice"],
+      "definition": "语音模型在中转站的可用性与价格。",
+      "related": ["models", "gemini"]
     },
     {
-      "slug": "embodied",
-      "name": "具身智能",
-      "group": "field",
-      "tags": [
-        "具身智能"
-      ],
-      "definition": "AI 走进物理世界：人形机器人、具身基础模型与真实环境操作能力的进展追踪。",
-      "related": [
-        "nvidia",
-        "multimodal",
-        "papers"
-      ]
+      "slug": "pricing",
+      "name": "价格变动",
+      "group": "issue",
+      "tags": ["价格变动", "price-hike", "price-drop"],
+      "definition": "中转站或上游的标价、倍率和套餐变化。记录旧价和新价，不比较哪一家更值。",
+      "related": ["price-hike", "price-drop", "policy"]
     },
     {
-      "slug": "on-device",
-      "name": "端侧 AI",
-      "group": "field",
-      "tags": [
-        "端侧"
-      ],
-      "definition": "跑在手机、电脑与边缘设备上的 AI：小模型、本地推理与端侧芯片的进展。",
-      "related": [
-        "engineering",
-        "open-source",
-        "model-releases"
-      ]
+      "slug": "price-hike",
+      "name": "涨价",
+      "group": "issue",
+      "tags": ["price-hike"],
+      "definition": "标明站点的涨价事实，包括旧价、新价和幅度。",
+      "related": ["pricing", "price-drop"]
     },
     {
-      "slug": "open-source",
-      "name": "开源生态",
-      "group": "field",
-      "tags": [
-        "开源生态",
-        "开源/仓库"
-      ],
-      "definition": "开源模型、框架与仓库动态：权重开放、社区项目爆火、开源与闭源的力量消长。",
-      "related": [
-        "model-releases",
-        "hugging-face",
-        "coding"
-      ]
+      "slug": "price-drop",
+      "name": "降价",
+      "group": "issue",
+      "tags": ["price-drop"],
+      "definition": "标明站点的降价或折扣变化，包括旧价和新价。",
+      "related": ["pricing", "price-hike"]
     },
     {
-      "slug": "engineering",
-      "name": "部署工程",
-      "group": "field",
-      "tags": [
-        "部署/工程"
-      ],
-      "definition": "把模型跑起来的工程实践：推理优化、显存与成本、Serving 架构与基础设施选型。",
-      "related": [
-        "open-source",
-        "data-training",
-        "on-device"
-      ]
+      "slug": "models",
+      "name": "模型上下架",
+      "group": "issue",
+      "tags": ["模型变动", "new-model"],
+      "definition": "中转站新增、移除或更换模型的事实。",
+      "related": ["new-model", "launches"]
     },
     {
-      "slug": "data-training",
-      "name": "数据与训练",
-      "group": "field",
-      "tags": [
-        "数据/训练"
-      ],
-      "definition": "训练侧的门道：数据集构建、合成数据、预训练与后训练方法、算力与训练成本。",
-      "related": [
-        "papers",
-        "engineering",
-        "model-releases"
-      ]
+      "slug": "new-model",
+      "name": "新模型",
+      "group": "issue",
+      "tags": ["new-model"],
+      "definition": "某个模型开始能通过中转站调用。",
+      "related": ["models", "policy"]
     },
     {
-      "slug": "safety",
-      "name": "安全对齐",
-      "group": "field",
-      "tags": [
-        "安全/对齐"
-      ],
-      "definition": "AI 安全与对齐：越狱与防御、模型行为研究、安全评测与治理框架的进展。",
-      "related": [
-        "papers",
-        "policy",
-        "reasoning"
-      ]
+      "slug": "incidents",
+      "name": "故障",
+      "group": "issue",
+      "tags": ["故障事件", "outage"],
+      "definition": "宕机、超时和降级：持续时间、受影响的模型。",
+      "related": ["outage", "data-leak", "closures"]
     },
     {
-      "slug": "mcp",
-      "name": "MCP 与工具调用",
-      "group": "field",
-      "tags": [
-        "MCP/工具调用"
-      ],
-      "definition": "模型连接外部世界的协议与实践：MCP 生态、function calling、工具链集成的动态。",
-      "related": [
-        "agent",
-        "coding",
-        "open-source"
-      ]
+      "slug": "outage",
+      "name": "中断",
+      "group": "issue",
+      "tags": ["outage"],
+      "definition": "服务中断的起止和影响范围。",
+      "related": ["incidents", "closures"]
     },
     {
-      "slug": "model-releases",
-      "name": "模型发布",
-      "group": "genre",
-      "tags": [
-        "模型发布"
-      ],
-      "definition": "新模型的发布、开源与迭代：大模型厂商的旗舰更新、开源权重放出、性能与价格变化的第一时间记录。",
-      "related": [
-        "product-updates",
-        "papers",
-        "open-source"
-      ]
+      "slug": "data-leak",
+      "name": "数据泄露",
+      "group": "issue",
+      "tags": ["data-leak"],
+      "definition": "密钥、余额或对话数据泄露的已报道事实。不转发对话内容。",
+      "related": ["incidents", "closures"]
     },
     {
-      "slug": "product-updates",
-      "name": "产品更新",
-      "group": "genre",
-      "tags": [
-        "产品更新"
-      ],
-      "definition": "AI 产品与应用的功能上新、改版与商业化动态——谁家的产品变强了、变贵了、能用了。",
-      "related": [
-        "model-releases",
-        "industry",
-        "coding"
-      ]
+      "slug": "closures",
+      "name": "关停与跑路",
+      "group": "issue",
+      "tags": ["关停跑路", "shutdown", "scam"],
+      "definition": "站点关停、失联或用户资金无法取回的事实。写清资金是否受影响，不给其他站背书。",
+      "related": ["shutdown", "scam", "incidents"]
     },
     {
-      "slug": "papers",
-      "name": "论文研究",
-      "group": "genre",
-      "tags": [
-        "论文/研究"
-      ],
-      "definition": "值得读的 AI 论文与研究成果：架构创新、训练方法、能力测量与理论进展的精选解读。",
-      "related": [
-        "reasoning",
-        "safety",
-        "data-training"
-      ]
+      "slug": "shutdown",
+      "name": "关停",
+      "group": "issue",
+      "tags": ["shutdown"],
+      "definition": "中转站停止服务或更换域名后失联。",
+      "related": ["closures", "scam"]
     },
     {
-      "slug": "benchmarks",
-      "name": "评测基准",
-      "group": "genre",
-      "tags": [
-        "评测/基准"
-      ],
-      "definition": "模型到底谁强：Benchmark 成绩、评测方法论争议与排行榜变化的持续记录。",
-      "related": [
-        "model-releases",
-        "papers",
-        "reasoning"
-      ]
+      "slug": "scam",
+      "name": "跑路",
+      "group": "issue",
+      "tags": ["scam"],
+      "definition": "充值后无法使用、无法提现或运营方失联的已报道事实。",
+      "related": ["closures", "shutdown"]
     },
     {
-      "slug": "tutorials",
-      "name": "教程实践",
-      "group": "genre",
-      "tags": [
-        "教程/实践"
-      ],
-      "definition": "拿来就能用的实操内容：提示词技巧、工作流搭建、工具用法与踩坑经验。",
-      "related": [
-        "coding",
-        "agent",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "opinions",
-      "name": "大佬观点",
-      "group": "genre",
-      "tags": [
-        "大佬观点"
-      ],
-      "definition": "行业关键人物在想什么：创始人访谈、研究者论战、投资人判断的观点集合。",
-      "related": [
-        "trends",
-        "industry"
-      ]
-    },
-    {
-      "slug": "trends",
-      "name": "现象与趋势",
-      "group": "genre",
-      "tags": [
-        "现象/趋势"
-      ],
-      "definition": "正在发生的行业级变化：使用习惯迁移、能力涌现、社会影响与市场格局的观察。",
-      "related": [
-        "opinions",
-        "industry",
-        "safety"
-      ]
-    },
-    {
-      "slug": "industry",
-      "name": "行业动态",
-      "group": "genre",
-      "tags": [
-        "行业动态"
-      ],
-      "definition": "AI 行业的商业脉搏：融资并购、人事变动、合作与竞争、政策与市场信号。",
-      "related": [
-        "trends",
-        "opinions",
-        "policy"
-      ]
+      "slug": "launches",
+      "name": "新站与功能",
+      "group": "issue",
+      "tags": ["新站上线"],
+      "definition": "新中转站或新接口上线的公告。只写它宣称提供什么，不评价值不值得用。",
+      "related": ["models", "pricing"]
     },
     {
       "slug": "policy",
-      "name": "政策监管",
-      "group": "genre",
-      "tags": [
-        "政策/监管"
-      ],
-      "definition": "AI 相关政策法规与政府监管动态：立法进展、出口管制与全球治理框架的追踪。",
-      "related": [
-        "industry",
-        "safety",
-        "trends"
-      ]
+      "name": "上游政策",
+      "group": "issue",
+      "tags": ["上游政策"],
+      "definition": "上游条款、封禁或接入规则的变化，以及它怎样改变中转站的运营。",
+      "related": ["regulation", "openai", "anthropic"]
+    },
+    {
+      "slug": "regulation",
+      "name": "监管",
+      "group": "issue",
+      "tags": ["监管规则"],
+      "definition": "直接约束中转站或跨境 API 调用的监管与数据规则。",
+      "related": ["policy"]
+    },
+    {
+      "slug": "reviews",
+      "name": "使用体验",
+      "group": "issue",
+      "tags": ["使用体验"],
+      "definition": "点名站点、时间和现象的用户报告。没有这些细节的抱怨不进这个主题。",
+      "related": ["incidents", "pricing"]
     }
   ]
 }
