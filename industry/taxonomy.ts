@@ -1,6 +1,6 @@
-// 这个行业的分类体系：类别、标签词表、公司（主体）名录，以及防止张冠李戴的身份词典。
+// 这个行业的分类体系：类别、标签词表、上游厂商名录，以及防止张冠李戴的身份词典。
 // 模型按这里的词表打标签，主题页（topics.json）按标签归类，筛选栏按类别分组。
-// 换行业时：类别的 key 会出现在网址里（/all?category=…），上线后就不要再改；标签和名录可以随时增减。
+// 类别的 key 会出现在网址里（/all?category=…），上线后就不要再改；标签和名录可以随时增减。
 
 /**
  * 网页上的类别（筛选栏、卡片角标、RSS 分类订阅）。key 是网址和接口里的身份，上线后不要改。
@@ -8,12 +8,14 @@
  * 没归上类的资料在日报里放进第一个 key 为 industry 的类别所在的节（没有就放最后一节）。
  */
 export const CATEGORIES = [
-  { key: "ai-models", label: "模型", section: "模型发布/更新", guide: "新模型、模型版本、权重开放、模型能力与价格变化的发布与评测结果" },
-  { key: "ai-products", label: "产品", section: "产品发布/更新", guide: "AI 产品、功能、应用、工具、API 与平台的发布和更新" },
-  { key: "industry", label: "行业", section: "行业动态", guide: "公司经营、融资并购、人事、合作、诉讼、监管与政策、市场与基础设施" },
-  { key: "paper", label: "论文", section: "论文研究", guide: "研究论文、技术报告、基准与数据集" },
-  { key: "tip", label: "教程", section: "技巧与观点", guide: "教程、实践经验、使用技巧、提示词与工具用法、深度技术讲解" },
-  { key: "opinion", label: "观点", section: "技巧与观点", guide: "人物观点、评论、分析、访谈、现象与趋势讨论" },
+  { key: "pricing", label: "价格", section: "价格变动", guide: "中转站或上游的标价、倍率、套餐、促销、免费额度变化。材料写了旧价和新价时归这里" },
+  { key: "models", label: "模型", section: "模型上下架", guide: "中转站上架、下架或更换模型；上游新模型开始或停止经中转提供" },
+  { key: "incidents", label: "故障", section: "故障与关停", guide: "宕机、超时、服务降级、错误率升高、数据泄露和其它安全事件" },
+  { key: "closures", label: "关停", section: "故障与关停", guide: "中转站关停、跑路、余额无法提现、域名更换后失联" },
+  { key: "launches", label: "上线", section: "新站与功能", guide: "新的中转站、新的 API 入口或新功能上线" },
+  { key: "policy", label: "上游政策", section: "政策与监管", guide: "OpenAI、Anthropic、Google 等上游的政策、条款或接入规则变化，并且会改变中转站的运营" },
+  { key: "regulation", label: "监管", section: "政策与监管", guide: "中国人工智能监管、跨境数据规则，以及其它直接约束中转站或 API 代理的规定" },
+  { key: "reviews", label: "体验", section: "使用体验", guide: "点名站点、时间和现象的用户报告或性能对照。没有具体站点或数字的空泛抱怨不要归这里" },
 ] as const;
 
 /**
@@ -26,114 +28,84 @@ export const ITEM_TYPES = ["model_release", "product_launch", "tool_or_prompt", 
 
 /** 每篇资料的第一个标签必须是这些“分类标签”之一。 */
 export const CATEGORY_TAGS = [
-  "产品更新", "模型发布", "论文/研究", "开源/仓库", "教程/实践", "现象/趋势", "大佬观点", "评测/基准", "安全/对齐", "行业动态", "政策/监管",
-  "非AI/通用工具", "其他",
+  "价格变动", "模型变动", "故障事件", "关停跑路", "新站上线", "上游政策", "监管规则", "使用体验", "其他",
 ] as const;
 
-/** 可选的主题标签。 */
+/** 可选的主题标签：按能力，以及按问题。取值与规格里的 feature / issue 标识一致。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "gpt4", "claude", "gemini", "o1", "reasoning", "vision", "code", "voice",
+  "outage", "price-hike", "price-drop", "new-model", "shutdown", "scam", "data-leak",
 ] as const;
 
-/** 可选的实体标签（公司、机构、平台）。 */
-export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Hugging Face", "GitHub", "arXiv"] as const;
+/** 可选的实体标签：上游模型厂商。取值与规格里的 provider 标识一致。 */
+export const ENTITY_TAGS = ["openai", "anthropic", "google", "deepseek", "qwen", "glm", "mistral", "meta"] as const;
 
 /** 模型常写的近义词，统一成词表里的写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
-  "教程/玩法": "教程/实践", "技巧/最佳实践": "教程/实践", "合作/生态": "行业动态", "融资/收购": "行业动态", "公司动态": "行业动态",
-  合作: "行业动态", 生态: "行业动态", 融资: "行业动态", 收购: "行业动态", 投资: "行业动态", 并购: "行业动态",
-  政策: "政策/监管", 监管: "政策/监管", 法规: "政策/监管", 安全: "安全/对齐", 对齐: "安全/对齐",
-  论文: "论文/研究", 研究: "论文/研究", paper: "论文/研究", papers: "论文/研究",
-  "open-source": "开源/仓库", 开源: "开源/仓库", 仓库: "开源/仓库", repo: "开源/仓库",
-  教程: "教程/实践", 玩法: "教程/实践", 指南: "教程/实践", 技巧: "教程/实践", 最佳实践: "教程/实践", 实践: "教程/实践",
-  产品: "产品更新", 更新: "产品更新", 发布: "模型发布", 模型: "模型发布", 趋势: "现象/趋势", 现象: "现象/趋势", 观点: "大佬观点",
-  视频生成: "视频", 非ai: "非AI/通用工具", "non-ai": "非AI/通用工具", 通用工具: "非AI/通用工具", 工程工具: "非AI/通用工具",
-  安全扫描: "非AI/通用工具", devops: "非AI/通用工具", 行业: "行业动态", 动态: "行业动态",
+  价格: "价格变动", 调价: "价格变动", 涨价: "price-hike", 降价: "price-drop", "price-hike": "price-hike", "price-drop": "price-drop",
+  模型: "模型变动", 上架: "模型变动", 下架: "模型变动", "new-model": "new-model", 新模型: "new-model",
+  故障: "故障事件", 宕机: "故障事件", 中断: "故障事件", outage: "outage",
+  关停: "关停跑路", 跑路: "关停跑路", shutdown: "shutdown", 诈骗: "scam", scam: "scam",
+  泄露: "data-leak", "data-leak": "data-leak", 数据泄露: "data-leak",
+  上线: "新站上线", 发布: "新站上线", 政策: "上游政策", 监管: "监管规则", 法规: "监管规则",
+  体验: "使用体验", 评测: "使用体验", 实测: "使用体验",
+  OpenAI: "openai", openai: "openai", ChatGPT: "openai", GPT: "gpt4", "GPT-4": "gpt4", gpt4: "gpt4",
+  Anthropic: "anthropic", anthropic: "anthropic", Claude: "claude", claude: "claude",
+  Google: "google", google: "google", Gemini: "gemini", gemini: "gemini", DeepMind: "google",
+  DeepSeek: "deepseek", deepseek: "deepseek", Qwen: "qwen", qwen: "qwen", 千问: "qwen",
+  GLM: "glm", glm: "glm", 智谱: "glm", Mistral: "mistral", mistral: "mistral",
+  Meta: "meta", meta: "meta", Llama: "meta",
+  o1: "o1", 推理: "reasoning", reasoning: "reasoning", 视觉: "vision", vision: "vision",
+  多模态: "vision", 编码: "code", code: "code", 语音: "voice", voice: "voice",
 };
 
 /** 模型漏了分类标签时，按内容类型补一个。 */
 export const CATEGORY_BY_ITEM_TYPE: Readonly<Record<string, string>> = {
-  model_release: "模型发布", product_launch: "产品更新", tool_or_prompt: "教程/实践", research_paper: "论文/研究",
-  industry_event: "行业动态", opinion_analysis: "大佬观点", tutorial_explainer: "教程/实践",
+  model_release: "模型变动", product_launch: "新站上线", tool_or_prompt: "使用体验", research_paper: "其他",
+  industry_event: "其他", opinion_analysis: "使用体验", tutorial_explainer: "使用体验",
 };
 
-// ── 公司与主体 ──────────────────────────────────────────────────────────────────────────
+// ── 上游厂商 ────────────────────────────────────────────────────────────────────────────
 
-/** 公司主题：id → 显示名、卡片上显示的标签（null 表示只用 entity:<id> 归类）、别名。 */
+/** 上游厂商：id → 显示名、卡片上显示的标签（必须在 ENTITY_TAGS 里）、别名。中转站本身不进这张表，名字以原文为准。 */
 export const ENTITIES: Record<string, { name: string; displayTag: string | null; aliases: string[] }> = {
-  openai: { name: "OpenAI", displayTag: "OpenAI", aliases: ["OpenAI", "ChatGPT", "Sora", "Codex", "GPT"] },
-  anthropic: { name: "Anthropic", displayTag: "Anthropic", aliases: ["Anthropic", "Claude"] },
-  google: { name: "Google", displayTag: "Google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"] },
-  deepseek: { name: "DeepSeek", displayTag: "DeepSeek", aliases: ["DeepSeek", "深度求索"] },
-  qwen: { name: "千问 Qwen", displayTag: null, aliases: ["Qwen", "通义", "阿里"] },
-  kimi: { name: "Kimi / 月之暗面", displayTag: null, aliases: ["Kimi", "月之暗面", "Moonshot"] },
-  minimax: { name: "MiniMax", displayTag: null, aliases: ["MiniMax", "海螺"] },
-  zhipu: { name: "智谱 GLM", displayTag: null, aliases: ["智谱", "GLM", "Z.ai"] },
-  xai: { name: "xAI", displayTag: "xAI", aliases: ["xAI", "Grok"] },
-  meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"] },
-  microsoft: { name: "Microsoft", displayTag: "Microsoft", aliases: ["Microsoft", "微软", "Copilot"] },
-  nvidia: { name: "NVIDIA", displayTag: null, aliases: ["NVIDIA", "英伟达"] },
-  "hugging-face": { name: "Hugging Face", displayTag: "Hugging Face", aliases: ["Hugging Face"] },
-  cursor: { name: "Cursor", displayTag: null, aliases: ["Cursor", "Anysphere"] },
-  openrouter: { name: "OpenRouter", displayTag: null, aliases: ["OpenRouter"] },
+  openai: { name: "OpenAI", displayTag: "openai", aliases: ["OpenAI", "ChatGPT", "GPT"] },
+  anthropic: { name: "Anthropic", displayTag: "anthropic", aliases: ["Anthropic", "Claude"] },
+  google: { name: "Google", displayTag: "google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"] },
+  deepseek: { name: "DeepSeek", displayTag: "deepseek", aliases: ["DeepSeek", "深度求索"] },
+  qwen: { name: "千问 Qwen", displayTag: "qwen", aliases: ["Qwen", "通义", "千问"] },
+  glm: { name: "智谱 GLM", displayTag: "glm", aliases: ["智谱", "GLM", "Z.ai"] },
+  mistral: { name: "Mistral", displayTag: "mistral", aliases: ["Mistral"] },
+  meta: { name: "Meta", displayTag: "meta", aliases: ["Meta", "Llama"] },
 };
 
 /**
- * 身份词典：摘要和标题里出现的公司，必须在原文里也出现过，否则退回原标题、丢掉摘要（防止模型张冠李戴）。
- * 行业没有这个问题时可以留空数组。
+ * 身份词典：摘要和标题里出现的上游厂商，必须在原文里也出现过，否则退回原标题、丢掉摘要。
+ * 中转站名字不在这张表里，只要原文写了就可以出现在标题里。
  */
 export const IDENTITY_LEXICON: ReadonlyArray<{ id: string; name: string; patterns: RegExp[] }> = [
-  { id: "openai", name: "OpenAI", patterns: [/openai|chatgpt|\bgpt-?[o\d]|\bsora\b|\bcodex\b/i] },
-  { id: "anthropic", name: "Anthropic", patterns: [/anthropic|\bclaude\b/i, /\b(?:opus|sonnet|haiku)\s*\d+(?:[.\-]\d+)*\b/i, /\bfable\s*\d+(?:[.\-]\d+)*\b|\bmythos\b/i] },
-  { id: "google", name: "Google / Gemini", patterns: [/google|deepmind|\bgemini\b|notebooklm|\bveo\s?\d|\bAlphaFold\b|\bAMIE\b/i] },
+  { id: "openai", name: "OpenAI", patterns: [/openai|chatgpt|\bgpt-?[o\d]/i] },
+  { id: "anthropic", name: "Anthropic", patterns: [/anthropic|\bclaude\b/i] },
+  { id: "google", name: "Google / Gemini", patterns: [/google|deepmind|\bgemini\b/i] },
   { id: "deepseek", name: "DeepSeek", patterns: [/deepseek|深度求索/i] },
-  { id: "xai", name: "xAI / Grok", patterns: [/\bxai\b|\bgrok\b/i] },
-  { id: "meta", name: "Meta / Llama", patterns: [/\bMeta\b/, /\bmeta\s?ai\b|\bllama\b/i] },
-  { id: "microsoft", name: "Microsoft / Copilot", patterns: [/microsoft|copilot|微软/i] },
-  { id: "nvidia", name: "NVIDIA", patterns: [/nvidia|英伟达|\bnemotron\b|\bnemo\b|\bblackwell\b|\brubin(?:\s+ultra)?\b|\bcuda\b/i] },
   { id: "qwen", name: "千问 Qwen", patterns: [/\bqwen|通义|千问/i] },
-  { id: "hugging-face", name: "Hugging Face", patterns: [/hugging\s?face/i] },
-  { id: "cursor", name: "Cursor", patterns: [/\bCursor\b/] },
-  { id: "kimi", name: "Kimi / 月之暗面", patterns: [/\bkimi\b|月之暗面|\bmoonshot\s?ai\b/i] },
-  { id: "openrouter", name: "OpenRouter", patterns: [/openrouter/i] },
-  { id: "minimax", name: "MiniMax", patterns: [/minimax/i] },
-  { id: "zhipu", name: "智谱 GLM", patterns: [/智谱|\bglm-?[4-9]/i] },
-  { id: "hunyuan", name: "腾讯混元", patterns: [/混元|hunyuan/i] },
-  { id: "doubao", name: "字节豆包", patterns: [/豆包|doubao|字节跳动|bytedance/i] },
+  { id: "glm", name: "智谱 GLM", patterns: [/智谱|\bglm-?[4-9]/i] },
   { id: "mistral", name: "Mistral", patterns: [/mistral/i] },
-  { id: "perplexity", name: "Perplexity", patterns: [/\bPerplexity\b/] },
-  { id: "runway", name: "Runway", patterns: [/\brunway\b/i] },
-  { id: "suno", name: "Suno", patterns: [/\bsuno\b/i] },
-  { id: "midjourney", name: "Midjourney", patterns: [/midjourney/i] },
-  { id: "stability-ai", name: "Stability AI", patterns: [/stability\s?ai/i] },
-  { id: "elevenlabs", name: "ElevenLabs", patterns: [/eleven\s?labs/i] },
-  { id: "vllm", name: "vLLM", patterns: [/\bvllm\b/i] },
-  { id: "ollama", name: "Ollama", patterns: [/\bollama\b/i] },
-  { id: "windsurf", name: "Windsurf", patterns: [/windsurf/i] },
-  { id: "devin", name: "Devin", patterns: [/\bdevin\b/i] },
-  { id: "manus", name: "Manus", patterns: [/\bmanus\b/i] },
-  { id: "apple", name: "Apple AI", patterns: [/\bapple\s?(intelligence|silicon|ai)\b|苹果(智能|\s?AI)/i] },
-  { id: "amazon", name: "Amazon / AWS", patterns: [/amazon|\baws\b|亚马逊/i] },
-  { id: "baidu", name: "百度文心", patterns: [/百度|baidu|文心|\bernie\s?bot\b/i] },
+  { id: "meta", name: "Meta / Llama", patterns: [/\bMeta\b/, /\bllama\b/i] },
 ];
 
-/** 这些域名上的文章，发布方就是对应的公司（托管平台如 GitHub、arXiv 不算）。 */
+/** 这些域名上的文章，发布方就是对应的上游厂商。中转站域名不在这里，避免把中转公告算成上游自己发的。 */
 export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: readonly string[] }> = [
   { entityId: "openai", domains: ["openai.com"] },
   { entityId: "anthropic", domains: ["anthropic.com", "claude.com"] },
-  { entityId: "google", domains: ["deepmind.google", "ai.google", "blog.google"] },
+  { entityId: "google", domains: ["deepmind.google", "ai.google.dev", "blog.google"] },
   { entityId: "deepseek", domains: ["deepseek.com"] },
-  { entityId: "xai", domains: ["x.ai"] },
-  { entityId: "meta", domains: ["ai.meta.com"] },
-  { entityId: "microsoft", domains: ["microsoft.com"] },
-  { entityId: "nvidia", domains: ["nvidia.com"] },
   { entityId: "qwen", domains: ["qwen.ai"] },
-  { entityId: "cursor", domains: ["cursor.com"] },
-  { entityId: "openrouter", domains: ["openrouter.ai"] },
+  { entityId: "mistral", domains: ["mistral.ai"] },
+  { entityId: "meta", domains: ["ai.meta.com"] },
 ];
 
-/** 原文里的这些写法也算提到了对应公司。 */
+/** 原文里的这些写法也算提到了对应厂商。 */
 export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [
   { entityId: "meta", pattern: /@AIatMeta\b/i },
-  { entityId: "zhipu", pattern: /\bZhipu(?:\s+AI\b|['’]s\b)/i },
 ];
