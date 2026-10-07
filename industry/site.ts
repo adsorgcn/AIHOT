@@ -12,10 +12,10 @@ export const SITE = {
   /** 首页的完整标题（浏览器标签、搜索结果）。 */
   homeTitle: "RelayWatch — 中转站与 API 代理的事实记录",
   /** 一句话介绍：搜索引擎、分享卡片、RSS、llms.txt 会用。 */
-  description: "Facts only on AI API relay stations and API proxy services. 记录中转站的价格、模型、故障、关停、上线和上游政策：哪一家、什么时候、发生了什么。不排名，不推荐。",
+  description: "只记录 AI API 中转站与 API 代理的事实：价格、模型、故障、关停、上线和上游政策——哪一家、什么时候、发生了什么。不排名，不推荐。",
   /** 首页左上角和侧边栏下面的一行小字。 */
   tagline: "只记录事实",
-  /** 界面语言（HTML lang、og:locale）。中文为主，英文为辅。 */
+  /** 界面语言（HTML lang、og:locale）。 */
   locale: "zh-CN",
   /** 默认域名，只在没设置 SITE_URL 时使用。 */
   defaultUrl: "http://localhost:3000",

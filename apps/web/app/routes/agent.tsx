@@ -19,17 +19,17 @@ export function headers() {
 const MCP_VERSION = "2.0.0";
 /** The machine-readable entry points, with what each one is for. */
 const RESOURCES: Array<[label: string, href: string, note: string]> = [
-  ["Agent Markdown", "/api/v1/agent", "给 Agent 的使用说明与答案"],
+  ["智能体 Markdown", "/api/v1/agent", "给智能体的使用说明与答案"],
   ["llms.txt", "/llms.txt", "给大模型读的站点说明"],
-  ["MCP Server", "/api/mcp", "MCP 客户端的连接地址"],
-  ["OpenAPI 3.1", "/openapi-v1.json", "REST API v1 的完整定义"],
+  ["MCP 服务", "/api/mcp", "MCP 客户端的连接地址"],
+  ["OpenAPI 3.1", "/openapi-v1.json", "开放接口 v1 的完整定义"],
 ];
 
 const TABS = [
-  { key: "markdown", label: "Agent Markdown" },
+  { key: "markdown", label: "智能体说明" },
   { key: "mcp", label: "MCP" },
   { key: "rss", label: "RSS" },
-  { key: "api", label: "REST API" },
+  { key: "api", label: "开放接口" },
 ] as const;
 type TabKey = (typeof TABS)[number]["key"];
 
@@ -49,7 +49,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export function meta({ loaderData }: Route.MetaArgs) {
   // Only the tab is part of the address (mcp is the default and not written).
   const path = listPath("/agent", { tab: loaderData && loaderData.tab !== "mcp" ? loaderData.tab : null });
-  return pageMeta({ title: "Agent 接入", description: `让 Agent 直接使用 ${SITE.name}：Markdown、MCP、RSS、REST API v1，匿名只读。`, path, image: "/og/pages/agent.png" });
+  return pageMeta({ title: "智能体接入", description: `让智能体直接使用 ${SITE.name}：Markdown、MCP、RSS、开放接口 v1，匿名只读。`, path, image: "/og/pages/agent.png" });
 }
 
 function Section({ title, children, id }: { title: string; children: ReactNode; id?: string }) {
@@ -79,7 +79,7 @@ function MarkdownTab({ base }: { base: string }) {
   const guide = `${base}/api/v1/agent`;
   const prompt = `请先读取 ${guide} 的使用说明，再根据里面提供的地址，帮我看看过去 24 小时 ${SITE.subject} 行业最重要的动态，附上来源和阅读链接。`;
   return <>
-    <h2 className="text-[20px] font-bold text-ink">给 Agent 一个地址，就能开始阅读</h2>
+    <h2 className="text-[20px] font-bold text-ink">给智能体一个地址，就能开始阅读</h2>
     <p className="mt-2 text-[14.5px] leading-relaxed text-ink-3">适合能读取网页的 Agent。使用说明列出最新资讯、搜索、热点、事件与日报；答案附来源、时间和阅读链接，能力更新也会出现在同一个说明地址。</p>
     <div className="mt-6 flex items-center gap-2 rounded-card border border-line bg-surface p-3">
       <a href="/api/v1/agent" className="min-w-0 flex-1 truncate font-mono text-[13px] text-accent">{guide}</a>
@@ -104,8 +104,8 @@ function McpTab({ base }: { base: string }) {
   const name = SITE.mcpPrefix;
   return (
     <>
-      <h2 className="text-[20px] font-bold text-ink">加一个地址，Agent 直接调用五个工具</h2>
-      <p className="mt-2 text-[14.5px] text-ink-3">适合支持远程 MCP 的 Agent 与开发工具。标准 Streamable HTTP，匿名只读，不需要 token；工具返回简洁文字与同一份结构化数据。</p>
+      <h2 className="text-[20px] font-bold text-ink">加一个地址，智能体直接调用五个工具</h2>
+      <p className="mt-2 text-[14.5px] text-ink-3">适合支持远程 MCP 的智能体与开发工具。标准 Streamable HTTP，匿名只读，不需要 token；工具返回简洁文字与同一份结构化数据。</p>
       <div className="mt-6 flex items-center gap-2 rounded-card border border-line bg-surface p-3">
         <code className="min-w-0 flex-1 truncate font-mono text-[13px] text-ink">{url}</code>
         <CopyButton text={url} className="!text-ink-3" />
@@ -160,7 +160,7 @@ function RssTab({ base }: { base: string }) {
           );
         })}
       </div>
-      <Section title="给阅读器和 Agent 的约定">
+      <Section title="给阅读器和智能体的约定">
         <Bullets items={[
           "支持 ETag 条件请求，未变化时返回 304；建议每 30 分钟或更慢轮询。",
           "条目 link 指向站内阅读页，第三方原文在 description 中。",
@@ -270,8 +270,8 @@ export default function AgentPage() {
   return (
     <ReadingLayout aside={aside}>
       <header>
-        <h1 className="text-[24px] font-semibold leading-[1.3] text-ink">让 Agent 直接使用 {SITE.name}</h1>
-        <p className="mt-1.5 text-[13px] text-ink-3">四种接入方式都是匿名只读、无需 API Key：Agent Markdown、MCP、RSS、REST API v1。</p>
+        <h1 className="text-[24px] font-semibold leading-[1.3] text-ink">让智能体直接使用 {SITE.name}</h1>
+        <p className="mt-1.5 text-[13px] text-ink-3">四种接入方式都是匿名只读、无需 API Key：智能体 Markdown、MCP、RSS、开放接口 v1。</p>
         <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
           <span className={pill}>匿名只读</span>
           <span className={`${pill} mono`}>API v1</span>

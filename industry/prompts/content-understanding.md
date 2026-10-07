@@ -36,8 +36,8 @@
 
 其后可选 0–5 个适用标签，并且只能来自以下两个白名单：
 
-- 主题：gpt4、claude、gemini、o1、reasoning、vision、code、voice、outage、price-hike、price-drop、new-model、shutdown、scam、data-leak
-- 实体：openai、anthropic、google、deepseek、qwen、glm、mistral、meta
+- 主题：GPT、Claude、Gemini、o系列、推理、视觉、代码、语音、中断、涨价、降价、新模型、关停、跑路、数据泄露
+- 实体：OpenAI、Anthropic、Google、DeepSeek、千问、智谱、Mistral、Meta
 
 正文中即使明确出现了其他站名或公司，也不要把它们放进 `tags`。不要创造白名单之外的标签。没有适用的主题或实体时，只返回第一个分类标签。
 
@@ -59,4 +59,4 @@
 
 只返回合法 JSON，不要 Markdown，不要解释。顶层必须且只能包含以下六个字段：
 
-{"itemType":"industry_event","authorRole":"principal","tags":["价格变动","price-hike","openai"],"editorialJudgment":"材料写明该站将某模型输入价从每百万 token 3 美元调到 3.6 美元。","titleZh":"某中转站上调某模型输入价格","summaryZh":"某中转站上调某模型输入价格，自材料所写日期起生效。输入价由每百万 token 3 美元改为 3.6 美元。"}
+{"itemType":"industry_event","authorRole":"principal","tags":["价格变动","涨价","OpenAI"],"editorialJudgment":"材料写明该站将某模型输入价从每百万 token 3 美元调到 3.6 美元。","titleZh":"某中转站上调某模型输入价格","summaryZh":"某中转站上调某模型输入价格，自材料所写日期起生效。输入价由每百万 token 3 美元改为 3.6 美元。"}

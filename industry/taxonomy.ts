@@ -31,32 +31,36 @@ export const CATEGORY_TAGS = [
   "价格变动", "模型变动", "故障事件", "关停跑路", "新站上线", "上游政策", "监管规则", "使用体验", "其他",
 ] as const;
 
-/** 可选的主题标签：按能力，以及按问题。取值与规格里的 feature / issue 标识一致。 */
+/** 可选的主题标签：按能力，以及按问题。读者看到的就是这些中文（或品牌常用写法）。 */
 export const TOPIC_TAGS = [
-  "gpt4", "claude", "gemini", "o1", "reasoning", "vision", "code", "voice",
-  "outage", "price-hike", "price-drop", "new-model", "shutdown", "scam", "data-leak",
+  "GPT", "Claude", "Gemini", "o系列", "推理", "视觉", "代码", "语音",
+  "中断", "涨价", "降价", "新模型", "关停", "跑路", "数据泄露",
 ] as const;
 
-/** 可选的实体标签：上游模型厂商。取值与规格里的 provider 标识一致。 */
-export const ENTITY_TAGS = ["openai", "anthropic", "google", "deepseek", "qwen", "glm", "mistral", "meta"] as const;
+/** 可选的实体标签：上游模型厂商。读者卡片上显示这些写法。 */
+export const ENTITY_TAGS = ["OpenAI", "Anthropic", "Google", "DeepSeek", "千问", "智谱", "Mistral", "Meta"] as const;
 
-/** 模型常写的近义词，统一成词表里的写法。 */
+/** 模型常写的近义词与旧英文标识，统一成词表里的中文写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
-  价格: "价格变动", 调价: "价格变动", 涨价: "price-hike", 降价: "price-drop", "price-hike": "price-hike", "price-drop": "price-drop",
-  模型: "模型变动", 上架: "模型变动", 下架: "模型变动", "new-model": "new-model", 新模型: "new-model",
-  故障: "故障事件", 宕机: "故障事件", 中断: "故障事件", outage: "outage",
-  关停: "关停跑路", 跑路: "关停跑路", shutdown: "shutdown", 诈骗: "scam", scam: "scam",
-  泄露: "data-leak", "data-leak": "data-leak", 数据泄露: "data-leak",
+  价格: "价格变动", 调价: "价格变动", 涨价: "涨价", 降价: "降价", "price-hike": "涨价", "price-drop": "降价",
+  模型: "模型变动", 上架: "模型变动", 下架: "模型变动", "new-model": "新模型", 新模型: "新模型",
+  故障: "故障事件", 宕机: "故障事件", 中断: "中断", outage: "中断",
+  关停跑路: "关停跑路", 关停: "关停", 跑路: "跑路", shutdown: "关停", 诈骗: "跑路", scam: "跑路",
+  泄露: "数据泄露", "data-leak": "数据泄露", 数据泄露: "数据泄露",
   上线: "新站上线", 发布: "新站上线", 政策: "上游政策", 监管: "监管规则", 法规: "监管规则",
   体验: "使用体验", 评测: "使用体验", 实测: "使用体验",
-  OpenAI: "openai", openai: "openai", ChatGPT: "openai", GPT: "gpt4", "GPT-4": "gpt4", gpt4: "gpt4",
-  Anthropic: "anthropic", anthropic: "anthropic", Claude: "claude", claude: "claude",
-  Google: "google", google: "google", Gemini: "gemini", gemini: "gemini", DeepMind: "google",
-  DeepSeek: "deepseek", deepseek: "deepseek", Qwen: "qwen", qwen: "qwen", 千问: "qwen",
-  GLM: "glm", glm: "glm", 智谱: "glm", Mistral: "mistral", mistral: "mistral",
-  Meta: "meta", meta: "meta", Llama: "meta",
-  o1: "o1", 推理: "reasoning", reasoning: "reasoning", 视觉: "vision", vision: "vision",
-  多模态: "vision", 编码: "code", code: "code", 语音: "voice", voice: "voice",
+  OpenAI: "OpenAI", openai: "OpenAI", ChatGPT: "OpenAI", GPT: "GPT", "GPT-4": "GPT", gpt4: "GPT",
+  Anthropic: "Anthropic", anthropic: "Anthropic", Claude: "Claude", claude: "Claude",
+  Google: "Google", google: "Google", Gemini: "Gemini", gemini: "Gemini", DeepMind: "Google", 谷歌: "Google",
+  DeepSeek: "DeepSeek", deepseek: "DeepSeek", 深度求索: "DeepSeek",
+  Qwen: "千问", qwen: "千问", 千问: "千问", 通义: "千问",
+  GLM: "智谱", glm: "智谱", 智谱: "智谱",
+  Mistral: "Mistral", mistral: "Mistral",
+  Meta: "Meta", meta: "Meta", Llama: "Meta",
+  o1: "o系列", "o系列": "o系列", 推理: "推理", reasoning: "推理",
+  视觉: "视觉", vision: "视觉", 多模态: "视觉",
+  编码: "代码", 代码: "代码", code: "代码",
+  语音: "语音", voice: "语音",
 };
 
 /** 模型漏了分类标签时，按内容类型补一个。 */
@@ -69,14 +73,14 @@ export const CATEGORY_BY_ITEM_TYPE: Readonly<Record<string, string>> = {
 
 /** 上游厂商：id → 显示名、卡片上显示的标签（必须在 ENTITY_TAGS 里）、别名。中转站本身不进这张表，名字以原文为准。 */
 export const ENTITIES: Record<string, { name: string; displayTag: string | null; aliases: string[] }> = {
-  openai: { name: "OpenAI", displayTag: "openai", aliases: ["OpenAI", "ChatGPT", "GPT"] },
-  anthropic: { name: "Anthropic", displayTag: "anthropic", aliases: ["Anthropic", "Claude"] },
-  google: { name: "Google", displayTag: "google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"] },
-  deepseek: { name: "DeepSeek", displayTag: "deepseek", aliases: ["DeepSeek", "深度求索"] },
-  qwen: { name: "千问 Qwen", displayTag: "qwen", aliases: ["Qwen", "通义", "千问"] },
-  glm: { name: "智谱 GLM", displayTag: "glm", aliases: ["智谱", "GLM", "Z.ai"] },
-  mistral: { name: "Mistral", displayTag: "mistral", aliases: ["Mistral"] },
-  meta: { name: "Meta", displayTag: "meta", aliases: ["Meta", "Llama"] },
+  openai: { name: "OpenAI", displayTag: "OpenAI", aliases: ["OpenAI", "ChatGPT", "GPT"] },
+  anthropic: { name: "Anthropic", displayTag: "Anthropic", aliases: ["Anthropic", "Claude"] },
+  google: { name: "Google", displayTag: "Google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"] },
+  deepseek: { name: "DeepSeek", displayTag: "DeepSeek", aliases: ["DeepSeek", "深度求索"] },
+  qwen: { name: "千问 Qwen", displayTag: "千问", aliases: ["Qwen", "通义", "千问"] },
+  glm: { name: "智谱 GLM", displayTag: "智谱", aliases: ["智谱", "GLM", "Z.ai"] },
+  mistral: { name: "Mistral", displayTag: "Mistral", aliases: ["Mistral"] },
+  meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"] },
 };
 
 /**

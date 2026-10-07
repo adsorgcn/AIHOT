@@ -9,7 +9,7 @@
     {
       "key": "feature",
       "name": "能力",
-      "blurb": "按模型和能力看：gpt4、claude、gemini、推理、视觉、代码、语音"
+      "blurb": "按模型和能力看：GPT、Claude、Gemini、推理、视觉、代码、语音"
     },
     {
       "key": "issue",
@@ -23,256 +23,438 @@
       "name": "OpenAI",
       "group": "upstream",
       "entityId": "openai",
-      "tags": ["openai", "entity:openai"],
+      "tags": [
+        "OpenAI",
+        "entity:openai"
+      ],
       "definition": "OpenAI 的政策、价格、模型和状态变化，以及这些变化在中转站上的对应事实。",
-      "related": ["anthropic", "google", "policy"]
+      "related": [
+        "anthropic",
+        "google",
+        "policy"
+      ]
     },
     {
       "slug": "anthropic",
       "name": "Anthropic",
       "group": "upstream",
       "entityId": "anthropic",
-      "tags": ["anthropic", "entity:anthropic"],
+      "tags": [
+        "Anthropic",
+        "entity:anthropic"
+      ],
       "definition": "Anthropic 与 Claude 的政策、价格、模型和状态变化，以及中转站是否仍提供这些模型。",
-      "related": ["openai", "google", "claude"]
+      "related": [
+        "openai",
+        "google",
+        "claude"
+      ]
     },
     {
       "slug": "google",
       "name": "Google",
       "group": "upstream",
       "entityId": "google",
-      "tags": ["google", "entity:google"],
+      "tags": [
+        "Google",
+        "entity:google"
+      ],
       "definition": "Google 与 Gemini 的政策、价格、模型和状态变化，以及中转站上的对应事实。",
-      "related": ["openai", "anthropic", "gemini"]
+      "related": [
+        "openai",
+        "anthropic",
+        "gemini"
+      ]
     },
     {
       "slug": "deepseek",
       "name": "DeepSeek",
       "group": "upstream",
       "entityId": "deepseek",
-      "tags": ["deepseek", "entity:deepseek"],
+      "tags": [
+        "DeepSeek",
+        "entity:deepseek"
+      ],
       "definition": "DeepSeek 模型在中转站的上下架、价格和可用性。",
-      "related": ["qwen", "glm", "new-model"]
+      "related": [
+        "qwen",
+        "glm",
+        "new-model"
+      ]
     },
     {
       "slug": "qwen",
       "name": "千问 Qwen",
       "group": "upstream",
       "entityId": "qwen",
-      "tags": ["qwen", "entity:qwen"],
+      "tags": [
+        "千问",
+        "entity:qwen"
+      ],
       "definition": "千问 Qwen 在中转站的上下架、价格和可用性。",
-      "related": ["deepseek", "glm", "new-model"]
+      "related": [
+        "deepseek",
+        "glm",
+        "new-model"
+      ]
     },
     {
       "slug": "glm",
       "name": "智谱 GLM",
       "group": "upstream",
       "entityId": "glm",
-      "tags": ["glm", "entity:glm"],
+      "tags": [
+        "智谱",
+        "entity:glm"
+      ],
       "definition": "智谱 GLM 在中转站的上下架、价格和可用性。",
-      "related": ["qwen", "deepseek", "new-model"]
+      "related": [
+        "qwen",
+        "deepseek",
+        "new-model"
+      ]
     },
     {
       "slug": "mistral",
       "name": "Mistral",
       "group": "upstream",
       "entityId": "mistral",
-      "tags": ["mistral", "entity:mistral"],
+      "tags": [
+        "Mistral",
+        "entity:mistral"
+      ],
       "definition": "Mistral 在中转站的上下架、价格和可用性。",
-      "related": ["meta", "new-model"]
+      "related": [
+        "meta",
+        "new-model"
+      ]
     },
     {
       "slug": "meta",
       "name": "Meta",
       "group": "upstream",
       "entityId": "meta",
-      "tags": ["meta", "entity:meta"],
+      "tags": [
+        "Meta",
+        "entity:meta"
+      ],
       "definition": "Meta 与 Llama 在中转站的上下架、价格和可用性。",
-      "related": ["mistral", "new-model"]
+      "related": [
+        "mistral",
+        "new-model"
+      ]
     },
     {
       "slug": "gpt4",
       "name": "GPT",
       "group": "feature",
-      "tags": ["gpt4"],
+      "tags": [
+        "GPT"
+      ],
       "definition": "GPT 系列经中转站提供时的价格、可用性和故障。",
-      "related": ["openai", "pricing", "o1"]
+      "related": [
+        "openai",
+        "pricing",
+        "o1"
+      ]
     },
     {
       "slug": "claude",
       "name": "Claude",
       "group": "feature",
-      "tags": ["claude"],
+      "tags": [
+        "Claude"
+      ],
       "definition": "Claude 系列经中转站提供时的价格、可用性和故障。",
-      "related": ["anthropic", "pricing", "code"]
+      "related": [
+        "anthropic",
+        "pricing",
+        "code"
+      ]
     },
     {
       "slug": "gemini",
       "name": "Gemini",
       "group": "feature",
-      "tags": ["gemini"],
+      "tags": [
+        "Gemini"
+      ],
       "definition": "Gemini 系列经中转站提供时的价格、可用性和故障。",
-      "related": ["google", "pricing", "vision"]
+      "related": [
+        "google",
+        "pricing",
+        "vision"
+      ]
     },
     {
       "slug": "o1",
       "name": "o 系列",
       "group": "feature",
-      "tags": ["o1"],
+      "tags": [
+        "o系列"
+      ],
       "definition": "o 系列等思考型模型在中转站的上下架与价格。",
-      "related": ["reasoning", "openai", "gpt4"]
+      "related": [
+        "reasoning",
+        "openai",
+        "gpt4"
+      ]
     },
     {
       "slug": "reasoning",
       "name": "推理",
       "group": "feature",
-      "tags": ["reasoning"],
+      "tags": [
+        "推理"
+      ],
       "definition": "推理模型在中转站的可用性、价格和故障。",
-      "related": ["o1", "models"]
+      "related": [
+        "o1",
+        "models"
+      ]
     },
     {
       "slug": "vision",
       "name": "视觉",
       "group": "feature",
-      "tags": ["vision"],
+      "tags": [
+        "视觉"
+      ],
       "definition": "视觉与多模态能力在中转站的可用性与价格。",
-      "related": ["gemini", "models"]
+      "related": [
+        "gemini",
+        "models"
+      ]
     },
     {
       "slug": "code",
       "name": "代码",
       "group": "feature",
-      "tags": ["code"],
+      "tags": [
+        "代码"
+      ],
       "definition": "代码模型与编码接口在中转站的可用性、价格和故障。",
-      "related": ["claude", "models"]
+      "related": [
+        "claude",
+        "models"
+      ]
     },
     {
       "slug": "voice",
       "name": "语音",
       "group": "feature",
-      "tags": ["voice"],
+      "tags": [
+        "语音"
+      ],
       "definition": "语音模型在中转站的可用性与价格。",
-      "related": ["models", "gemini"]
+      "related": [
+        "models",
+        "gemini"
+      ]
     },
     {
       "slug": "pricing",
       "name": "价格变动",
       "group": "issue",
-      "tags": ["价格变动", "price-hike", "price-drop"],
+      "tags": [
+        "价格变动",
+        "涨价",
+        "降价"
+      ],
       "definition": "中转站或上游的标价、倍率和套餐变化。记录旧价和新价，不比较哪一家更值。",
-      "related": ["price-hike", "price-drop", "policy"]
+      "related": [
+        "price-hike",
+        "price-drop",
+        "policy"
+      ]
     },
     {
       "slug": "price-hike",
       "name": "涨价",
       "group": "issue",
-      "tags": ["price-hike"],
+      "tags": [
+        "涨价"
+      ],
       "definition": "标明站点的涨价事实，包括旧价、新价和幅度。",
-      "related": ["pricing", "price-drop"]
+      "related": [
+        "pricing",
+        "price-drop"
+      ]
     },
     {
       "slug": "price-drop",
       "name": "降价",
       "group": "issue",
-      "tags": ["price-drop"],
+      "tags": [
+        "降价"
+      ],
       "definition": "标明站点的降价或折扣变化，包括旧价和新价。",
-      "related": ["pricing", "price-hike"]
+      "related": [
+        "pricing",
+        "price-hike"
+      ]
     },
     {
       "slug": "models",
       "name": "模型上下架",
       "group": "issue",
-      "tags": ["模型变动", "new-model"],
+      "tags": [
+        "模型变动",
+        "新模型"
+      ],
       "definition": "中转站新增、移除或更换模型的事实。",
-      "related": ["new-model", "launches"]
+      "related": [
+        "new-model",
+        "launches"
+      ]
     },
     {
       "slug": "new-model",
       "name": "新模型",
       "group": "issue",
-      "tags": ["new-model"],
+      "tags": [
+        "新模型"
+      ],
       "definition": "某个模型开始能通过中转站调用。",
-      "related": ["models", "policy"]
+      "related": [
+        "models",
+        "policy"
+      ]
     },
     {
       "slug": "incidents",
       "name": "故障",
       "group": "issue",
-      "tags": ["故障事件", "outage"],
+      "tags": [
+        "故障事件",
+        "中断"
+      ],
       "definition": "宕机、超时和降级：持续时间、受影响的模型。",
-      "related": ["outage", "data-leak", "closures"]
+      "related": [
+        "outage",
+        "data-leak",
+        "closures"
+      ]
     },
     {
       "slug": "outage",
       "name": "中断",
       "group": "issue",
-      "tags": ["outage"],
+      "tags": [
+        "中断"
+      ],
       "definition": "服务中断的起止和影响范围。",
-      "related": ["incidents", "closures"]
+      "related": [
+        "incidents",
+        "closures"
+      ]
     },
     {
       "slug": "data-leak",
       "name": "数据泄露",
       "group": "issue",
-      "tags": ["data-leak"],
+      "tags": [
+        "数据泄露"
+      ],
       "definition": "密钥、余额或对话数据泄露的已报道事实。不转发对话内容。",
-      "related": ["incidents", "closures"]
+      "related": [
+        "incidents",
+        "closures"
+      ]
     },
     {
       "slug": "closures",
       "name": "关停与跑路",
       "group": "issue",
-      "tags": ["关停跑路", "shutdown", "scam"],
+      "tags": [
+        "关停跑路",
+        "关停",
+        "跑路"
+      ],
       "definition": "站点关停、失联或用户资金无法取回的事实。写清资金是否受影响，不给其他站背书。",
-      "related": ["shutdown", "scam", "incidents"]
+      "related": [
+        "shutdown",
+        "scam",
+        "incidents"
+      ]
     },
     {
       "slug": "shutdown",
       "name": "关停",
       "group": "issue",
-      "tags": ["shutdown"],
+      "tags": [
+        "关停"
+      ],
       "definition": "中转站停止服务或更换域名后失联。",
-      "related": ["closures", "scam"]
+      "related": [
+        "closures",
+        "scam"
+      ]
     },
     {
       "slug": "scam",
       "name": "跑路",
       "group": "issue",
-      "tags": ["scam"],
+      "tags": [
+        "跑路"
+      ],
       "definition": "充值后无法使用、无法提现或运营方失联的已报道事实。",
-      "related": ["closures", "shutdown"]
+      "related": [
+        "closures",
+        "shutdown"
+      ]
     },
     {
       "slug": "launches",
       "name": "新站与功能",
       "group": "issue",
-      "tags": ["新站上线"],
+      "tags": [
+        "新站上线"
+      ],
       "definition": "新中转站或新接口上线的公告。只写它宣称提供什么，不评价值不值得用。",
-      "related": ["models", "pricing"]
+      "related": [
+        "models",
+        "pricing"
+      ]
     },
     {
       "slug": "policy",
       "name": "上游政策",
       "group": "issue",
-      "tags": ["上游政策"],
+      "tags": [
+        "上游政策"
+      ],
       "definition": "上游条款、封禁或接入规则的变化，以及它怎样改变中转站的运营。",
-      "related": ["regulation", "openai", "anthropic"]
+      "related": [
+        "regulation",
+        "openai",
+        "anthropic"
+      ]
     },
     {
       "slug": "regulation",
       "name": "监管",
       "group": "issue",
-      "tags": ["监管规则"],
+      "tags": [
+        "监管规则"
+      ],
       "definition": "直接约束中转站或跨境 API 调用的监管与数据规则。",
-      "related": ["policy"]
+      "related": [
+        "policy"
+      ]
     },
     {
       "slug": "reviews",
       "name": "使用体验",
       "group": "issue",
-      "tags": ["使用体验"],
+      "tags": [
+        "使用体验"
+      ],
       "definition": "点名站点、时间和现象的用户报告。没有这些细节的抱怨不进这个主题。",
-      "related": ["incidents", "pricing"]
+      "related": [
+        "incidents",
+        "pricing"
+      ]
     }
   ]
 }
