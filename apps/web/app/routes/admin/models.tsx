@@ -29,7 +29,7 @@ export default function ModelsAdmin({ loaderData: m }: Route.ComponentProps) {
   return (
     <AdminPage
       title="模型与评测"
-      subtitle="每项能力当前用哪个模型、来自哪里（后台切换 > 环境变量 > 代码默认），以及近期的成功率、耗时与费用。切换只影响之后的新任务，已有结果不重算；换精选模型前先看 SelectBench 同批对比。"
+      subtitle="每项能力当前用哪个模型、来自哪里（后台切换 > 环境变量 > 代码默认），以及近期的成功率、耗时与费用。切换只影响之后的新任务，已有结果不重算；换精选模型前先看精选评测同批对比。"
       actions={<FilterChips param="days" options={[{ value: "1", label: "24 小时" }, { value: "", label: "7 天" }, { value: "30", label: "30 天" }]} />}
     >
       <div className="grid gap-5">
@@ -121,7 +121,7 @@ export default function ModelsAdmin({ loaderData: m }: Route.ComponentProps) {
             <Empty>还没有在后台切换过模型</Empty>
           )}
         </Card>
-        <Card title="同批样本对比（SelectBench）" right={<Link to="/admin/selectbench" className="text-accent">全部运行</Link>} pad={false}>
+        <Card title="同批样本对比（精选评测）" right={<Link to="/admin/selectbench" className="text-accent">全部运行</Link>} pad={false}>
           {m.benches.length ? (
             <DataTable
               dense

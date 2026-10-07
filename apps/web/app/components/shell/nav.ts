@@ -35,7 +35,7 @@ export const SIDEBAR: Array<{ title: string; items: NavItem[] }> = [
           title: "模型",
           items: [
             ...(FEATURES.leaderboard ? [{ to: "/leaderboard", label: "模型榜", icon: IconChart }] : []),
-            ...(FEATURES.codexResetMonitor ? [{ to: "/codex-reset", label: "Tibo重置监控", icon: IconHistory }] : []),
+            ...(FEATURES.codexResetMonitor ? [{ to: "/codex-reset", label: "额度重置监控", icon: IconHistory }] : []),
           ],
         },
       ]
@@ -43,7 +43,7 @@ export const SIDEBAR: Array<{ title: string; items: NavItem[] }> = [
   {
     title: "更多",
     items: [
-      { to: "/agent", label: "Agent 接入", icon: IconPlug },
+      { to: "/agent", label: "智能体接入", icon: IconPlug },
       { to: "/about", label: "关于", icon: IconHeart },
       { to: "/changelog", label: "更新日志", icon: IconHistory, changelog: true },
       { to: "/feedback", label: "反馈", icon: IconMessage },

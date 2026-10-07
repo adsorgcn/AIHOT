@@ -82,10 +82,9 @@ export function channelCondition(channel: ChannelKey | null | undefined) {
   return sql`AND p.channel = ${channel}`;
 }
 
-export function categoryCondition(category: CategoryKey | null | undefined, v1 = false) {
+/** Category filter. The second argument stays so v1 and RSS callers keep compiling; the example pack's tip/opinion alias left with those category keys. */
+export function categoryCondition(category: CategoryKey | null | undefined, _v1 = false) {
   if (!category) return sql``;
-  // v1 and RSS publish opinion as tip.
-  if (v1 && category === "tip") return sql`AND p.category IN ('tip', 'opinion')`;
   return sql`AND p.category = ${category}`;
 }
 
